@@ -1,0 +1,29 @@
+.Dd $Mdocdate$
+.Dt sendjunk 1
+.Os
+.Sh NAME
+.Nm sendjunk
+.Nd encrypt and send crap to an e-mail address
+.Sh SYNOPSIS
+.Nm sendjunk
+.Ar address publickey
+.Sh DESCRIPTION
+.Nm
+generates junk text, encrypts this text with PGP public key
+.Ar publickey ,
+then sends this encrypted text to e-mail address
+.Ar address .
+.Pp
+.Ar publickey
+actually contains a PGP fingerprint, as opposed to a
+.Qq proper
+PGP public key.
+
+.Ar address
+follows the format
+.Sy [USERNAME]@[DOMAIN] .
+.Sh AUTHORS
+.Nm
+is maintained by
+.An Varik Valefor
+.Aq varikvalefor@aol.com .
