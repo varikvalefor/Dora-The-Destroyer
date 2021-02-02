@@ -1,18 +1,19 @@
+nero# cat sendjunk.hs
 import Resource.Mail;
 import Resource.PGP;
 import Resource.Bullshit;
-
-target :: GeneralUser;
-target = GeneralUser {
-  eml = "INSERT E-MAIL ADDRESS HERE.",
-  pgp = "INSERT PGP KEY FINGERPRINT HERE."
-}
+import System.Environment;
 
 subjectline :: String;
 subjectline = "(URGENT) Patch for Security Vulnerability";
 
-main = generateCrap >>= \garbage ->
-  encrypt garbage (pgp target) >>= \cyphertext ->
-    sendmail cyphertext subjectline target;
-    -- To be horrible, enable the following line:
-    -- >> main
+main = getArgs >>= \argz ->
+  generateCrap >>= \garbage ->
+    encrypt garbage (pgp $ k argz) >>= \cyphertext ->
+      sendmail cyphertext subjectline (k argz)
+      -- To be horrible, enable the following line:
+      -- >> main
+      where k a = GeneralUser {
+              eml = a !! 0,
+              pgp = a !! 1
+            }
