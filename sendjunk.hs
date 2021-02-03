@@ -1,19 +1,25 @@
-nero# cat sendjunk.hs
 import Resource.Mail;
 import Resource.PGP;
 import Resource.Bullshit;
 import System.Environment;
 
-subjectline :: String;
-subjectline = "(URGENT) Patch for Security Vulnerability";
+-- gs determines the subject line.
+gs :: [String] -> String;
+gs a
+  | length a > 2 = a !! 2
+  | otherwise = "(URGENT) Patch for Security Vulnerability"
 
+encCrapWKey :: [Char] -> IO [Char];
+encCrapWKey key = generateCrap >>= \crap -> encrypt crap key;
+
+main :: IO ();
 main = getArgs >>= \argz ->
-  generateCrap >>= \garbage ->
-    encrypt garbage (pgp $ k argz) >>= \cyphertext ->
-      sendmail cyphertext subjectline (k argz)
-      -- To be horrible, enable the following line:
-      -- >> main
-      where k a = GeneralUser {
-              eml = a !! 0,
-              pgp = a !! 1
-            }
+  encCrapWKey (pgp $ k argz) >>= \crap ->
+    sendmail crap (gs argz) (k argz) >>
+    putStrLn ":^)"
+    -- To be horrible, enable the following line:
+    -- >> main
+    where k a = GeneralUser {
+            eml = a !! 0,
+            pgp = a !! 1
+          }
