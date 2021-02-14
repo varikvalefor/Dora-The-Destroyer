@@ -1,3 +1,5 @@
+import Control.Concurrent;
+
 bigNums :: [Integer];
 bigNums = map ((10^).(10^)) [1..];
 
