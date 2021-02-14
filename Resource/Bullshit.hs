@@ -2,7 +2,7 @@ module Resource.Bullshit where
   import System.Random;
 
   junkChars :: [Char];
-  junkChars = ['A'..'Z'] ++ ['a'..'z'] ++ ['0'..'9'] ++ "+/";
+  junkChars = ['0'..'z'];
 
   generateCrap :: IO [Char];
   generateCrap = newStdGen >>= \a -> return $ take 5555 $ theRand a
