@@ -9,7 +9,8 @@ sel :: Int -> IO [Char];
 sel n = generateCrap >>= return . take n . filter (`elem` hexDigit);
 
 timeToChoose :: [Char] -> IO ();
-timeToChoose a | a == "crapsum256" = (sel >=> putStrLn) 64
-               | a == "crapsum512" = (sel >=> putStrLn) 128
+timeToChoose "crapsum256" = (sel >=> putStrLn) 64;
+timeToChoose "crapsum512" = (sel >=> putStrLn) 128;
+
 main :: IO ();
 main = getProgName >>= timeToChoose;
