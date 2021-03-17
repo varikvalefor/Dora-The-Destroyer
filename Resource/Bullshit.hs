@@ -5,6 +5,6 @@ module Resource.Bullshit where
   junkChars = ['0'..'z'];
 
   generateCrap :: IO [Char];
-  generateCrap = newStdGen >>= \a -> return $ take 5555 $ theRand a
+  generateCrap = newStdGen >>= return . take 5555 . theRand
     where convert n = junkChars !! ((n `mod`) $ length junkChars)
           theRand n = map convert (randoms n :: [Int])
