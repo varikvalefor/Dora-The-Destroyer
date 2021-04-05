@@ -14,7 +14,7 @@ encCrapWKey key = generateCrap >>= \crap -> encrypt crap key;
 
 main :: IO ();
 main = getArgs >>=
-  encCrapWKey . pgp . k argz >>= \crap ->
+  encCrapWKey . pgp . k >>= \crap ->
     sendmail crap (gs argz) (k argz) >>
     putStrLn ":^)"
     -- To be horrible, enable the following line:
