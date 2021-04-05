@@ -13,8 +13,8 @@ encCrapWKey :: [Char] -> IO [Char];
 encCrapWKey key = generateCrap >>= \crap -> encrypt crap key;
 
 main :: IO ();
-main = getArgs >>= \argz ->
-  encCrapWKey (pgp $ k argz) >>= \crap ->
+main = getArgs >>=
+  encCrapWKey . pgp . k argz >>= \crap ->
     sendmail crap (gs argz) (k argz) >>
     putStrLn ":^)"
     -- To be horrible, enable the following line:
