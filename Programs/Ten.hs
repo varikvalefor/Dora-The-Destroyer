@@ -1,5 +1,4 @@
 module Programs.Ten where
-
 import Control.Concurrent;
 
 -- | bigNums equals <10^10^k | k in N>, where N denotes the sequence of
