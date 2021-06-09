@@ -8,6 +8,7 @@ manish "sendjunk" = SJ.main;
 manish "ten" = TN.main;
 manish x
   | take 7 x == "crapsum" = CS.main;
+manish _ = error "RTFM and stop inputting crap.";
 
 main :: IO ();
 main = getProgName >>= manish;
