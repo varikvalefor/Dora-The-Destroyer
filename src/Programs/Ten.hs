@@ -1,18 +1,19 @@
-module Programs.Ten where
-import Control.Concurrent;
-
--- | bigNums equals <10^10^k | k in N>, where N denotes the sequence of
--- all natural numbers.
-bigNums :: [Integer];
-bigNums = map ((10^).(10^)) [1..];
-
--- | g k equals "".  g exists for the purpose of using relatively large
--- amounts of RAM.
-toJunk :: Eq a => [a] -> [Char];
-toJunk = foldr (++) [] . map (\a -> "");
--- toJunk is used to load bigNums into memory without actually printing
--- bigNums; printing bigNums uses a decent bit of processing power
--- without using much RAM, which is undesirable.
+module Programs.Ten (main) where
+import qualified Data.List as DL;
 
 main :: IO ();
-main = putStrLn $ toJunk bigNums;
+main = mapM_ putStrLn (goodBitsOf bal) >> main;
+
+-- | holyMessage equals the content of the Holy Message.
+holyMessage :: String;
+holyMessage = "Mother of God, it's all toilet sounds!";
+
+-- | bal is a large list of type [String].  Determining the meaning of
+-- the acronymic name is left as an exercise for the reader.
+bal :: [String];
+bal = DL.subsequences $ "We are the music makers.  " ++ [' '..'z'];
+
+-- | For all [String] k, goodBitsOf k equals the list of all "good",
+-- i.e., "holy", elements of k.
+goodBitsOf :: [String] -> [String];
+goodBitsOf = filter (== holyMessage) . DL.sort;
