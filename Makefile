@@ -7,3 +7,7 @@ build: Programs/SendJunk.hs Programs/Ten.hs Programs/CrapSum.hs Resource/Bullshi
 	ln -s dtd sendjunk
 	ln -s dtd crapsum256
 	ln -s dtd crapsum512
+install:
+	mv ten sendjunk crapsum256 crapsum512 dtd /usr/local/sbin/
+uninstall:
+	rm /usr/local/sbin/ten /usr/local/sbin/sendjunk /usr/local/sbin/crapsum256 /usr/local/sbin/crapsum512 /usr/local/sbin/dtd
