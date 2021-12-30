@@ -13,11 +13,11 @@ hexDigit = ['0'..'9'] ++ ['a'..'f'];
 sel :: Int -> IO [Char];
 sel n = generateCrap >>= return . take n . filter (`elem` hexDigit);
 
--- | timeToChoose determines the version of crapsum which should be
--- used, i.e., the number of junk characters which should be returned.
-timeToChoose :: [Char] -> IO ();
-timeToChoose "crapsum256" = (sel >=> putStrLn) 64;
-timeToChoose "crapsum512" = (sel >=> putStrLn) 128;
-
 main :: IO ();
-main = getProgName >>= timeToChoose;
+main = getProgName >>= sel . lengthOf >>= putStrLn
+  where
+  lengthOf :: String -> Int
+  lengthOf n = case (drop 7 n) of
+    "256" -> 64
+    "512" -> 128
+    _     -> error "Some fucked-up command is used.";
