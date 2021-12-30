@@ -11,7 +11,7 @@ hexDigit = ['0'..'9'] ++ ['a'..'f'];
 -- | For all positive Integer k, sel k equals k pseudorandom hexadecimal
 -- characters.
 sel :: Int -> IO [Char];
-sel n = generateCrap >>= return . take n . filter (`elem` hexDigit);
+sel n = take n . filter (`elem` hexDigit) <$> generateCrap;
 
 main :: IO ();
 main = getProgName >>= sel . lengthOf >>= putStrLn
