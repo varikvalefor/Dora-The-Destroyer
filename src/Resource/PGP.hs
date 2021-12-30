@@ -17,4 +17,4 @@ encrypt :: String
         -> String
         -- ^ The name of the recipient
         -> IO String;
-encrypt massage r = readProcess "gpg2" ["-ear", recipient] massage;
+encrypt massage r = readProcess "gpg2" ["-ear", r] massage;
