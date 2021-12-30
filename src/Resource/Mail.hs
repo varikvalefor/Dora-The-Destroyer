@@ -20,8 +20,8 @@ module Resource.Mail where
 
   -- | @sendMail msg sbj rcv@ sends an e-mail whose body and subject are
   -- @msg@ and @sbj@, respectively, to the user @rcv@, returning
-  -- whatever sendmail(1) writes to the standard output when sendmail(1)
-  -- sends the message.
+  -- whatever mail(1) writes to the standard output when mail(1) sends
+  -- the message.
   sendmail :: String
            -- ^ The body of the message
            -> String
