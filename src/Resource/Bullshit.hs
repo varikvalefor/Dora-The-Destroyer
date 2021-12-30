@@ -11,7 +11,7 @@ module Resource.Bullshit where
 import Data.Word (Word8);
 import qualified Data.ByteString.Lazy as BSL;
 
--- | @generateCrap@ returns a pseudorandom 'String'.
+-- | @generateCrap@ returns an infinite pseudorandom 'String'.
 generateCrap :: IO String;
 generateCrap = toString . makeGood <$> BSL.readFile "/dev/random"
   where
@@ -19,7 +19,7 @@ generateCrap = toString . makeGood <$> BSL.readFile "/dev/random"
   toString = map (toEnum . fromEnum) . BSL.unpack
   --
   makeGood :: BSL.ByteString -> BSL.ByteString
-  makeGood = BSL.take 5555 . BSL.filter (`elem` acceptableChars)
+  makeGood = BSL.filter (`elem` acceptableChars)
   --
   acceptableChars :: [Word8]
   acceptableChars = map (toEnum . fromEnum) ['0'..'z'];

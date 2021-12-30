@@ -18,7 +18,7 @@ gs a
 -- pseudorandom junk data, encrypts this junk data with k, and returns
 -- the resulting encrypted junk data.
 encCrapWKey :: [Char] -> IO [Char];
-encCrapWKey key = generateCrap >>= \crap -> encrypt crap key;
+encCrapWKey k = take 5555 <$> generateCrap >>= \crap -> encrypt crap k;
 
 main :: IO ();
 main = getArgs >>= \argz ->
