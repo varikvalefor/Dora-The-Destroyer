@@ -1,8 +1,8 @@
 module Programs.SendJunk where
 
-import Resource.Mail;
 import Resource.PGP;
 import Control.Monad;
+import Resource.Mail;
 import Resource.Bullshit;
 import System.Environment;
 
