@@ -2,6 +2,7 @@ module Programs.SendJunk where
 
 import Resource.Mail;
 import Resource.PGP;
+import Control.Monad;
 import Resource.Bullshit;
 import System.Environment;
 
@@ -21,13 +22,10 @@ encCrapWKey :: [Char] -> IO [Char];
 encCrapWKey k = take 5555 <$> generateCrap >>= \crap -> encrypt crap k;
 
 main :: IO ();
-main = getArgs >>= \argz ->
-  (encCrapWKey $ pgp $ k argz) >>= \crap ->
-    sendmail crap (gs argz) (k argz) >>
-    putStrLn ":^)"
-    -- To be horrible, enable the following line:
-    -- >> main
-    where k a = GeneralUser {
-            eml = a !! 0,
-            pgp = a !! 1
-          }
+main = getArgs >>= \tga -> encCrapWKey (pgp $ k tga) >>= sendThing tga
+  where 
+  sendThing argaments crap = void $ sendmail crap (gs argaments) (k argaments)
+  k a = GeneralUser {
+    eml = a !! 0,
+    pgp = a !! 1
+  };
