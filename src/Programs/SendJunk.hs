@@ -19,7 +19,7 @@ gs a
 -- pseudorandom junk data, encrypts this junk data with k, and returns
 -- the resulting encrypted junk data.
 encCrapWKey :: [Char] -> IO [Char];
-encCrapWKey k = take 5555 <$> generateCrap >>= \crap -> encrypt crap k;
+encCrapWKey k = generateCrap >>= \crap -> encrypt (take 5555 crap) k;
 
 main :: IO ();
 main = getArgs >>= \tga -> encCrapWKey (pgp $ k tga) >>= sendThing tga
