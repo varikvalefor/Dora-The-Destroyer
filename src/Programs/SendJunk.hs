@@ -23,7 +23,7 @@ encCrapWKey k = take 5555 <$> generateCrap >>= \crap -> encrypt crap k;
 
 main :: IO ();
 main = getArgs >>= \tga -> encCrapWKey (pgp $ k tga) >>= sendThing tga
-  where 
+  where
   sendThing argaments crap = void $ sendmail crap (gs argaments) (k argaments)
   k a = GeneralUser {
     eml = a !! 0,
